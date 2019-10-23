@@ -20,6 +20,17 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+      case "REMOVE_FEATURE":
+          return {
+              ...state,
+              car: {
+                  ...state.car,
+                  price: state.car.price - action.payload.price,
+                  features: state.car.features.filter(item => {
+                      return item.id !== action.payload.id
+                  })
+              }
+          }
     case "BUY_FEATURE":
       if (state.car.features.find(item => item.id === action.payload.id)) {
         return state;
